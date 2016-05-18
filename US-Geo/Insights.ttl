@@ -1,284 +1,319 @@
 # imports: http://spinrdf.org/spin
 # imports: http://spinrdf.org/sp
-@prefix vas: <http://os-em.com/ontologies/semoss#> .
 @prefix spin: <http://spinrdf.org/spin#> .
 @prefix sp: <http://spinrdf.org/sp#> .
 @prefix spl: <http://spinrdf.org/spl#> .
 @prefix olo: <http://purl.org/ontology/olo/core#> .
 @prefix ui: <http://uispin.org/ui#> .
-@prefix insights: <http://os-em.com/dataset/insights#> .
 @prefix arg: <http://spinrdf.org/arg#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix vac: <http://os-em.com/ontologies/core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix semoss: <http://semoss.org/ontologies/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix semonto: <http://semoss.org/ontologies/semtool/> .
+@prefix semtool: <http://os-em.com/ontologies/semtool#> .
+@prefix semcore: <http://os-em.com/ontologies/semtool/core#> .
+@prefix sempers: <http://os-em.com/ontologies/semtool/insights#> .
 
-<http://os-em.com/dataset/insights> a vac:InsightDataset .
+<http://os-em.com/ontologies/semtool/insights> a sempers:InsightDataset .
 
-insights:perspective-1441735133264 a vas:Perspective ;
+sempers:perspective-1441735133264 a sempers:Perspective ;
 	rdfs:label "County-Perspective" ;
 	dcterms:description "Test Description: County-Perspective" ;
-	dcterms:created "2016-05-12T07:42:04.753-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.753-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-05-12T14:56:06.240-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.240-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" .
 
-insights:Insight-1441741862867 a spin:MagicProperty ;
+sempers:Insight-1441741862867 a spin:MagicProperty ;
 	rdfs:label "Show number of Vets in 2000" ;
 	dcterms:description "" ;
-	vas:outputType "HEATMAP_US" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "HEATMAP_US" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.020-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.754-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.241-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Show_number_of_Vets_in_2000_query .
+	spin:body sempers:Show_number_of_Vets_in_2000_query .
 
-insights:Show_number_of_Vets_in_2000_query sp:text """SELECT ?County_fips ?County_Veterans_2000 ?County WHERE  {
-  ?County semoss:fips ?County_fips .
+sempers:Show_number_of_Vets_in_2000_query sp:text """SELECT ?County_fips ?County_Veterans_2000 ?County WHERE  {
+  ?County semonto:fips ?County_fips .
   OPTIONAL { 
-  	?County semoss:Veterans_2000 ?County_Veterans_2000 .
+  	?County semonto:Veterans_2000 ?County_Veterans_2000 .
   }
-  ?County rdf:type semoss:County  .
+  ?County rdf:type semonto:County  .
 }""" ;
 	a sp:Select .
 
-insights:County-Perspective-insight-1439232100613 a spin:MagicProperty ;
+sempers:County-Perspective-insight-1439232100613 a spin:MagicProperty ;
 	rdfs:label "Show County level Median Household Income in 2013" ;
 	dcterms:description "" ;
-	vas:outputType "HEATMAP_US" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "HEATMAP_US" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.022-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.754-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.241-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:L384060a4-46c0-4775-a9de-255548c067e2 .
+	spin:body sempers:O83813612-0d6b-44ad-b8b3-5a08166f0448 .
 
-insights:L384060a4-46c0-4775-a9de-255548c067e2 sp:text """SELECT DISTINCT ?fips ?MedianHouseholdIncome2013 ?County
+sempers:O83813612-0d6b-44ad-b8b3-5a08166f0448 sp:text """SELECT DISTINCT ?fips ?MedianHouseholdIncome2013 ?County
 WHERE { 
-	?County a semoss:County .
-	?County semoss:fips ?fips .
+	?County a semonto:County .
+	?County semonto:fips ?fips .
 	OPTIONAL {
-		?County semoss:Median_Household_Income_2013 ?MedianHouseholdIncome2013 .
+		?County semonto:Median_Household_Income_2013 ?MedianHouseholdIncome2013 .
 	} 
 }""" ;
 	a sp:Select .
 
-insights:County-Perspective-insight-1439231862768 a spin:MagicProperty ;
+sempers:County-Perspective-insight-1439231862768 a spin:MagicProperty ;
 	rdfs:label "Show unemployment rate by county in 2014" ;
 	dcterms:description "" ;
-	vas:outputType "HEATMAP_US" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "HEATMAP_US" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.024-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.755-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.242-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Show_unemployment_rate_by_county_in_2014_query .
+	spin:body sempers:Show_unemployment_rate_by_county_in_2014_query .
 
-insights:Show_unemployment_rate_by_county_in_2014_query sp:text """SELECT ?County_fips ?County_Unemployment_rate_2014 ?County WHERE  {
-  ?County semoss:fips ?County_fips .
-  OPTIONAL { ?County semoss:Unemployment_rate_2014 ?County_Unemployment_rate_2014 } .
-  ?County rdf:type semoss:County  .
+sempers:Show_unemployment_rate_by_county_in_2014_query sp:text """SELECT ?County_fips ?County_Unemployment_rate_2014 ?County WHERE  {
+  ?County semonto:fips ?County_fips .
+  OPTIONAL { ?County semonto:Unemployment_rate_2014 ?County_Unemployment_rate_2014 } .
+  ?County rdf:type semonto:County  .
 }""" ;
 	a sp:Select .
 
-insights:County-Perspective-insight-1438780456953 a spin:MagicProperty ;
+sempers:County-Perspective-insight-1438780456953 a spin:MagicProperty ;
 	rdfs:label "Show deaths by County in 2014" ;
 	dcterms:description "" ;
-	vas:outputType "GRID" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "GRID" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.025-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.755-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.242-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Show_deaths_by_County_in_2014_query .
+	spin:body sempers:Show_deaths_by_County_in_2014_query .
 
-insights:Show_deaths_by_County_in_2014_query sp:text """SELECT ?County_fips ?County_Deaths_2014 ?County WHERE  {
-  ?County semoss:fips ?County_fips .
-  ?County rdf:type semoss:County  .
-  OPTIONAL { ?County semoss:Deaths_2014 ?County_Deaths_2014 } .
+sempers:Show_deaths_by_County_in_2014_query sp:text """SELECT ?County_fips ?County_Deaths_2014 ?County WHERE  {
+  ?County semonto:fips ?County_fips .
+  ?County rdf:type semonto:County  .
+  OPTIONAL { ?County semonto:Deaths_2014 ?County_Deaths_2014 } .
 }""" ;
 	a sp:Select .
 
-insights:County-Perspective-insight-1438812277286 a spin:MagicProperty ;
+sempers:County-Perspective-insight-1438812277286 a spin:MagicProperty ;
 	rdfs:label "Show deaths per capita in 2014" ;
 	dcterms:description "" ;
-	vas:outputType "GRID" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "GRID" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.028-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.756-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.243-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Show_deaths_per_capita_in_2014_query .
+	spin:body sempers:Show_deaths_per_capita_in_2014_query .
 
-insights:Show_deaths_per_capita_in_2014_query sp:text """SELECT DISTINCT ?County ((?Deaths2014 / ?Pop) AS ?DeathsPerCapita) ?CountyName
+sempers:Show_deaths_per_capita_in_2014_query sp:text """SELECT DISTINCT ?County ((?Deaths2014 / ?Pop) AS ?DeathsPerCapita) ?CountyName
 WHERE { 
-	?County a semoss:County .
+	?County a semonto:County .
 	OPTIONAL {
-		?County semoss:POP_ESTIMATE_2014 ?Pop ;
-		semoss:Deaths_2014 ?Deaths2014 .
+		?County semonto:POP_ESTIMATE_2014 ?Pop ;
+		semonto:Deaths_2014 ?Deaths2014 .
 	} 
 }""" ;
 	a sp:Select .
 
-insights:County-Perspective-insight-1438806591571 a spin:MagicProperty ;
+sempers:County-Perspective-insight-1438806591571 a spin:MagicProperty ;
 	rdfs:label "Show Births per Capita in 2014" ;
 	dcterms:description "" ;
-	vas:outputType "GRID" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "GRID" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.029-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.756-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.244-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Show_Births_per_Capita_in_2014_query .
+	spin:body sempers:Show_Births_per_Capita_in_2014_query .
 
-insights:Show_Births_per_Capita_in_2014_query sp:text """SELECT DISTINCT ?County ((?Births2014 / ?Pop) AS ?BirthsPerCapita) ?CountyName
+sempers:Show_Births_per_Capita_in_2014_query sp:text """SELECT DISTINCT ?County ((?Births2014 / ?Pop) AS ?BirthsPerCapita) ?CountyName
 WHERE { 
-	?County a semoss:County .
+	?County a semonto:County .
 	OPTIONAL {
-		?County semoss:POP_ESTIMATE_2014 ?Pop ;
-		semoss:Deaths_2014 ?Births2014 .
+		?County semonto:POP_ESTIMATE_2014 ?Pop ;
+		semonto:Deaths_2014 ?Births2014 .
 	} 
 }""" ;
 	a sp:Select .
 
-insights:County-Perspective-insight-1438780182079 a spin:MagicProperty ;
+sempers:County-Perspective-insight-1438780182079 a spin:MagicProperty ;
 	rdfs:label "Show Births by County in 2014" ;
 	dcterms:description "" ;
-	vas:outputType "GRID" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "GRID" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.031-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.757-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.244-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Show_Births_by_County_in_2014_query .
+	spin:body sempers:Show_Births_by_County_in_2014_query .
 
-insights:Show_Births_by_County_in_2014_query sp:text """SELECT ?County_fips ?County_Births_2014 ?County WHERE  {
-  ?County semoss:fips ?County_fips .
-  ?County rdf:type semoss:County  .
-  OPTIONAL { ?County semoss:Births_2014 ?County_Births_2014 } .
+sempers:Show_Births_by_County_in_2014_query sp:text """SELECT ?County_fips ?County_Births_2014 ?County WHERE  {
+  ?County semonto:fips ?County_fips .
+  ?County rdf:type semonto:County  .
+  OPTIONAL { ?County semonto:Births_2014 ?County_Births_2014 } .
 }""" ;
 	a sp:Select .
 
-insights:perspective-1441735133264 olo:slot insights:County-Perspective-slot-1 .
+sempers:perspective-1441735133264 olo:slot sempers:County-Perspective-slot-1 .
 
-insights:County-Perspective-slot-1 olo:index "1"^^xsd:int ;
-	olo:item insights:Insight-1441741862867 .
+sempers:County-Perspective-slot-1 olo:index "1"^^xsd:int ;
+	olo:item sempers:Insight-1441741862867 .
 
-insights:perspective-1441735133264 olo:slot insights:County-Perspective-slot-2 .
+sempers:perspective-1441735133264 olo:slot sempers:County-Perspective-slot-2 .
 
-insights:County-Perspective-slot-2 olo:index "2"^^xsd:int ;
-	olo:item insights:County-Perspective-insight-1439232100613 .
+sempers:County-Perspective-slot-2 olo:index "2"^^xsd:int ;
+	olo:item sempers:County-Perspective-insight-1439232100613 .
 
-insights:perspective-1441735133264 olo:slot insights:County-Perspective-slot-3 .
+sempers:perspective-1441735133264 olo:slot sempers:County-Perspective-slot-3 .
 
-insights:County-Perspective-slot-3 olo:index "3"^^xsd:int ;
-	olo:item insights:County-Perspective-insight-1439231862768 .
+sempers:County-Perspective-slot-3 olo:index "3"^^xsd:int ;
+	olo:item sempers:County-Perspective-insight-1439231862768 .
 
-insights:perspective-1441735133264 olo:slot insights:County-Perspective-slot-4 .
+sempers:perspective-1441735133264 olo:slot sempers:County-Perspective-slot-4 .
 
-insights:County-Perspective-slot-4 olo:index "4"^^xsd:int ;
-	olo:item insights:County-Perspective-insight-1438780456953 .
+sempers:County-Perspective-slot-4 olo:index "4"^^xsd:int ;
+	olo:item sempers:County-Perspective-insight-1438780456953 .
 
-insights:perspective-1441735133264 olo:slot insights:County-Perspective-slot-5 .
+sempers:perspective-1441735133264 olo:slot sempers:County-Perspective-slot-5 .
 
-insights:County-Perspective-slot-5 olo:index "5"^^xsd:int ;
-	olo:item insights:County-Perspective-insight-1438812277286 .
+sempers:County-Perspective-slot-5 olo:index "5"^^xsd:int ;
+	olo:item sempers:County-Perspective-insight-1438812277286 .
 
-insights:perspective-1441735133264 olo:slot insights:County-Perspective-slot-6 .
+sempers:perspective-1441735133264 olo:slot sempers:County-Perspective-slot-6 .
 
-insights:County-Perspective-slot-6 olo:index "6"^^xsd:int ;
-	olo:item insights:County-Perspective-insight-1438806591571 .
+sempers:County-Perspective-slot-6 olo:index "6"^^xsd:int ;
+	olo:item sempers:County-Perspective-insight-1438806591571 .
 
-insights:perspective-1441735133264 olo:slot insights:County-Perspective-slot-7 .
+sempers:perspective-1441735133264 olo:slot sempers:County-Perspective-slot-7 .
 
-insights:County-Perspective-slot-7 olo:index "7"^^xsd:int ;
-	olo:item insights:County-Perspective-insight-1438780182079 .
+sempers:County-Perspective-slot-7 olo:index "7"^^xsd:int ;
+	olo:item sempers:County-Perspective-insight-1438780182079 .
 
-insights:perspective-1441735133264 olo:index "0"^^xsd:int .
+sempers:perspective-1441735133264 olo:index "0"^^xsd:int .
 
-insights:perspective-1441735133293 a vas:Perspective ;
+sempers:perspective-1441735133293 a sempers:Perspective ;
 	rdfs:label "State-Perspective" ;
 	dcterms:description "Test Description: State-Perspective" ;
-	dcterms:created "2016-05-12T07:42:04.757-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.757-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-05-12T14:56:06.245-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.245-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" .
 
-insights:State_Perspective_County_Births a spin:MagicProperty ;
-	rdfs:label "County Births" ;
+sempers:State_Perspective_State_Counties a spin:MagicProperty ;
+	rdfs:label "State Counties" ;
 	dcterms:description "" ;
-	vas:outputType "GRID" ;
-	rdfs:subClassOf vas:InsightProperties ;
-	dcterms:created "2016-05-12T07:42:04.758-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.758-04:00"^^xsd:dateTime ;
+	sempers:outputType "GRAPH" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-05-12T14:56:06.245-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.245-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:County_Births_query .
+	spin:body sempers:State_Counties_query .
 
-insights:County_Births_query sp:text """SELECT ?State ?County ?County_Births_2014 WHERE  {
-  ?State rdf:type semoss:State  .
-  ?County semoss:Births_2014 ?County_Births_2014 .
-  ?County rdf:type semoss:County  .
-  ?State semoss:Consists ?County .
+sempers:State_Counties_query sp:text """SELECT ?State ?link ?County  WHERE  {
+  ?State rdf:type semonto:State  .
+  ?State ?link ?County VALUES ?link { semonto:Consists } .
+  ?County rdf:type semonto:County  .
 }""" ;
 	a sp:Select .
 
-insights:State_Perspective_County_Births_State rdfs:label "State" ;
-	spl:predicate insights:State_Perspective_County_Births_State_pred ;
-	sp:query insights:State_Perspective_County_Births_State_query .
+sempers:State_Perspective_State_Counties_State rdfs:label "State" ;
+	spl:predicate sempers:State_Perspective_State_Counties_State_pred ;
+	sp:query sempers:State_Perspective_State_Counties_State_query .
 
-insights:State_Perspective_County_Births_State_pred rdfs:label "State" .
+sempers:State_Perspective_State_Counties_State_pred rdfs:label "State" .
 
-insights:State_Perspective_County_Births_State_query sp:text """SELECT ?State
+sempers:State_Perspective_State_Counties_State_query sp:text """SELECT ?State
 WHERE {
   ?State a <http://semoss.org/ontologies/State>
 }""" .
 
-insights:State_Perspective_County_Births spin:constraint insights:State_Perspective_County_Births_State .
+sempers:State_Perspective_State_Counties spin:constraint sempers:State_Perspective_State_Counties_State .
 
-insights:State_Perspective_Violent_Crime_by_State a spin:MagicProperty ;
+sempers:State_Perspective_County_Births a spin:MagicProperty ;
+	rdfs:label "County Births" ;
+	dcterms:description "" ;
+	sempers:outputType "GRID" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-05-12T07:40:53.496-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.246-04:00"^^xsd:dateTime ;
+	dcterms:creator "ryan" ;
+	spin:body sempers:County_Births_query .
+
+sempers:County_Births_query sp:text """SELECT ?State ?County ?County_Births_2014 WHERE  {
+  ?State rdf:type semonto:State  .
+  ?County semonto:Births_2014 ?County_Births_2014 .
+  ?County rdf:type semonto:County  .
+  ?State semonto:Consists ?County .
+}""" ;
+	a sp:Select .
+
+sempers:State_Perspective_County_Births_State rdfs:label "State" ;
+	spl:predicate sempers:State_Perspective_County_Births_State_pred ;
+	sp:query sempers:State_Perspective_County_Births_State_query .
+
+sempers:State_Perspective_County_Births_State_pred rdfs:label "State" .
+
+sempers:State_Perspective_County_Births_State_query sp:text """SELECT ?State
+WHERE {
+  ?State a <http://semoss.org/ontologies/State>
+}""" .
+
+sempers:State_Perspective_County_Births spin:constraint sempers:State_Perspective_County_Births_State .
+
+sempers:State_Perspective_Violent_Crime_by_State a spin:MagicProperty ;
 	rdfs:label "Larceny Rate by State" ;
 	dcterms:description "" ;
-	vas:outputType "COLUMN_CHART" ;
-	rdfs:subClassOf vas:InsightProperties ;
-	dcterms:created "2016-05-12T07:42:04.758-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.759-04:00"^^xsd:dateTime ;
+	sempers:outputType "COLUMN_CHART" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-05-12T07:40:53.497-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.247-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Larceny_Rate_by_State_query .
+	spin:body sempers:Larceny_Rate_by_State_query .
 
-insights:Larceny_Rate_by_State_query sp:text """SELECT ?State ?State_Larceny_theft_rate WHERE  {
-  ?State semoss:Larceny_theft_rate ?State_Larceny_theft_rate .
+sempers:Larceny_Rate_by_State_query sp:text """SELECT ?State ?State_Larceny_theft_rate WHERE  {
+  ?State semonto:Larceny_theft_rate ?State_Larceny_theft_rate .
   ?State rdfs:label ?State_label .
-  ?State rdf:type semoss:State  .
+  ?State rdf:type semonto:State  .
 }""" ;
 	a sp:Select .
 
-insights:Geo-Perspective-insight-1435348650753 a spin:MagicProperty ;
+sempers:Geo-Perspective-insight-1435348650753 a spin:MagicProperty ;
 	rdfs:label "Show Violent Crime by State" ;
 	dcterms:description "" ;
-	vas:outputType "HEATMAP_US" ;
-	rdfs:subClassOf vas:InsightProperties ;
+	sempers:outputType "HEATMAP_US" ;
+	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2015-09-30T15:59:00.044-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-05-12T07:42:04.759-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-05-12T14:56:06.247-04:00"^^xsd:dateTime ;
 	dcterms:creator "ryan" ;
-	spin:body insights:Show_Violent_Crime_by_State_query .
+	spin:body sempers:Show_Violent_Crime_by_State_query .
 
-insights:Show_Violent_Crime_by_State_query sp:text """SELECT ?State_FIPS_State_Code ?State_Violent_Crime_rate ?State WHERE  {
-  ?State semoss:FIPS_State_Code ?State_FIPS_State_Code .
-  OPTIONAL { ?State semoss:Violent_Crime_rate ?State_Violent_Crime_rate } .
-  ?State rdf:type semoss:State  .
+sempers:Show_Violent_Crime_by_State_query sp:text """SELECT ?State_FIPS_State_Code ?State_Violent_Crime_rate ?State WHERE  {
+  ?State semonto:FIPS_State_Code ?State_FIPS_State_Code .
+  OPTIONAL { ?State semonto:Violent_Crime_rate ?State_Violent_Crime_rate } .
+  ?State rdf:type semonto:State  .
 }""" ;
 	a sp:Select .
 
-insights:perspective-1441735133293 olo:slot insights:State-Perspective-slot-1 .
+sempers:perspective-1441735133293 olo:slot sempers:State-Perspective-slot-1 .
 
-insights:State-Perspective-slot-1 olo:index "1"^^xsd:int ;
-	olo:item insights:State_Perspective_County_Births .
+sempers:State-Perspective-slot-1 olo:index "1"^^xsd:int ;
+	olo:item sempers:State_Perspective_State_Counties .
 
-insights:perspective-1441735133293 olo:slot insights:State-Perspective-slot-2 .
+sempers:perspective-1441735133293 olo:slot sempers:State-Perspective-slot-2 .
 
-insights:State-Perspective-slot-2 olo:index "2"^^xsd:int ;
-	olo:item insights:State_Perspective_Violent_Crime_by_State .
+sempers:State-Perspective-slot-2 olo:index "2"^^xsd:int ;
+	olo:item sempers:State_Perspective_County_Births .
 
-insights:perspective-1441735133293 olo:slot insights:State-Perspective-slot-3 .
+sempers:perspective-1441735133293 olo:slot sempers:State-Perspective-slot-3 .
 
-insights:State-Perspective-slot-3 olo:index "3"^^xsd:int ;
-	olo:item insights:Geo-Perspective-insight-1435348650753 .
+sempers:State-Perspective-slot-3 olo:index "3"^^xsd:int ;
+	olo:item sempers:State_Perspective_Violent_Crime_by_State .
 
-insights:perspective-1441735133293 olo:index "1"^^xsd:int .
+sempers:perspective-1441735133293 olo:slot sempers:State-Perspective-slot-4 .
+
+sempers:State-Perspective-slot-4 olo:index "4"^^xsd:int ;
+	olo:item sempers:Geo-Perspective-insight-1435348650753 .
+
+sempers:perspective-1441735133293 olo:index "1"^^xsd:int .
