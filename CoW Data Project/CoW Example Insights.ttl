@@ -38,12 +38,12 @@ sempers:Perspective a owl:Class ;
 	rdfs:label "Perspective" ;
 	rdfs:subClassOf olo:OrderedList , ui:Element .
 
-_:node1asj9s1nrx1 a owl:Restriction ;
+_:node1asjhf39rx1 a owl:Restriction ;
 	owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
 	owl:onClass sempers:InsightProperties ;
 	owl:onProperty olo:item .
 
-sempers:Perspective rdfs:subClassOf _:node1asj9s1nrx1 .
+sempers:Perspective rdfs:subClassOf _:node1asjhf39rx1 .
 
 sempers:insight a owl:ObjectProperty ;
 	rdfs:label "insight" ;
@@ -54,17 +54,35 @@ semonto:insights a semcore:InsightDataset .
 sempers:CoW_Perspective a sempers:Perspective ;
 	rdfs:label "CoW Perspective" ;
 	dcterms:description "CoW Perspective" ;
-	dcterms:created "2016-09-13T22:54:33.213-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-13T22:54:33.213-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-09-14T01:07:17.435-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T01:07:17.435-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" .
+
+sempers:CoW_Perspective_col_chart a spin:MagicProperty ;
+	rdfs:label "col chart" ;
+	dcterms:description "" ;
+	sempers:outputType "GRID" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
+	dcterms:creator "Harold" ;
+	spin:body sempers:col_chart_query .
+
+sempers:col_chart_query sp:text """SELECT DISTINCT ?CCode (xsd:double(COUNT(DISTINCT(?year))) AS ?YearCount)
+WHERE {
+  ?year a semonto:year .
+  ?CCode semonto:MemberIn ?year .
+  ?CCode a semonto:CCode .
+} GROUP BY ?CCode""" ;
+	a sp:Select .
 
 sempers:CoW_Perspective_County_to_Year a spin:MagicProperty ;
 	rdfs:label "County to Year" ;
 	dcterms:description "" ;
 	sempers:outputType "GRID" ;
 	rdfs:subClassOf sempers:InsightProperties ;
-	dcterms:created "2016-09-13T22:54:33.214-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-13T22:54:33.215-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T01:07:17.437-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:County_to_Year_query .
 
@@ -83,8 +101,8 @@ sempers:CoW_Perspective_All_Years_Membership a spin:MagicProperty ;
 	dcterms:description "" ;
 	sempers:outputType "GRAPH" ;
 	rdfs:subClassOf sempers:InsightProperties ;
-	dcterms:created "2016-09-13T22:54:33.215-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-13T22:54:33.215-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-09-14T01:07:17.437-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T01:07:17.437-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:All_Years_Membership_query .
 
@@ -103,8 +121,8 @@ sempers:CoW_Perspective_year_membership_in_1900 a spin:MagicProperty ;
 	dcterms:description "" ;
 	sempers:outputType "GRAPH" ;
 	rdfs:subClassOf sempers:InsightProperties ;
-	dcterms:created "2016-09-13T22:54:33.216-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-13T22:54:33.216-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-09-14T01:07:17.438-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T01:07:17.438-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:year_membership_in_1900_query .
 
@@ -121,16 +139,21 @@ WHERE {
 sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_1 .
 
 sempers:CoW_Perspective_slot_1 olo:index "1"^^xsd:int ;
-	olo:item sempers:CoW_Perspective_County_to_Year .
+	olo:item sempers:CoW_Perspective_col_chart .
 
 sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_2 .
 
 sempers:CoW_Perspective_slot_2 olo:index "2"^^xsd:int ;
-	olo:item sempers:CoW_Perspective_All_Years_Membership .
+	olo:item sempers:CoW_Perspective_County_to_Year .
 
 sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_3 .
 
 sempers:CoW_Perspective_slot_3 olo:index "3"^^xsd:int ;
+	olo:item sempers:CoW_Perspective_All_Years_Membership .
+
+sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_4 .
+
+sempers:CoW_Perspective_slot_4 olo:index "4"^^xsd:int ;
 	olo:item sempers:CoW_Perspective_year_membership_in_1900 .
 
 sempers:CoW_Perspective olo:index "0"^^xsd:int .
