@@ -1,0 +1,136 @@
+# imports: http://spinrdf.org/spin
+# imports: http://spinrdf.org/sp
+@prefix spin: <http://spinrdf.org/spin#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix olo: <http://purl.org/ontology/olo/core#> .
+@prefix ui: <http://uispin.org/ui#> .
+@prefix arg: <http://spinrdf.org/arg#> .
+@prefix sempers: <http://os-em.com/ontologies/semtool/insights#> .
+@prefix semtool: <http://os-em.com/ontologies/semtool#> .
+@prefix semcore: <http://os-em.com/ontologies/semtool/core#> .
+@prefix semonto: <http://os-em.com/ontologies/semtool/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+semonto:insights semcore:author "ry.bobko <ryan@ostrich-emulators.com>" ;
+	semcore:namespace "http://semoss.org/ontologies/semtool/insights#" ;
+	semcore:namespacePrefix "sempers" ;
+	semcore:revision "2129" ;
+	semcore:revisionDate "2016-05-18T19:55:03.120-04:00"^^xsd:dateTime ;
+	semcore:specificity "1"^^xsd:integer ;
+	semcore:version "1.0" ;
+	owl:versionIRI <http://semoss.org/ontologies/semtool/insights/v1.0> ;
+	a owl:Ontology ;
+	owl:imports semonto:core ;
+	owl:versionInfo "sempers.ttl 2129 2016-05-18T19:55:03.120-04:00 ry.bobko" .
+
+sempers:InsightProperties a spin:MagicProperty ;
+	rdfs:label "Insight Properties" ;
+	rdfs:subClassOf spin:MagicProperties .
+
+sempers:Perspective a owl:Class ;
+	rdfs:label "Perspective" ;
+	rdfs:subClassOf olo:OrderedList , ui:Element .
+
+_:node1asj9s1nrx1 a owl:Restriction ;
+	owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass sempers:InsightProperties ;
+	owl:onProperty olo:item .
+
+sempers:Perspective rdfs:subClassOf _:node1asj9s1nrx1 .
+
+sempers:insight a owl:ObjectProperty ;
+	rdfs:label "insight" ;
+	rdfs:range sempers:InsightProperties .
+
+semonto:insights a semcore:InsightDataset .
+
+sempers:CoW_Perspective a sempers:Perspective ;
+	rdfs:label "CoW Perspective" ;
+	dcterms:description "CoW Perspective" ;
+	dcterms:created "2016-09-13T22:54:33.213-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-13T22:54:33.213-04:00"^^xsd:dateTime ;
+	dcterms:creator "Harold" .
+
+sempers:CoW_Perspective_County_to_Year a spin:MagicProperty ;
+	rdfs:label "County to Year" ;
+	dcterms:description "" ;
+	sempers:outputType "GRID" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-09-13T22:54:33.214-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-13T22:54:33.215-04:00"^^xsd:dateTime ;
+	dcterms:creator "Harold" ;
+	spin:body sempers:County_to_Year_query .
+
+sempers:County_to_Year_query sp:text """SELECT DISTINCT ?CCode ?year
+WHERE {
+  ?CCode semonto:MemberIn ?year .
+  ?year a semonto:year .
+  ?CCode ?MemberIn ?year .
+  ?MemberIn semonto:version ?version .
+  ?year rdfs:label ?year_label .
+}""" ;
+	a sp:Select .
+
+sempers:CoW_Perspective_All_Years_Membership a spin:MagicProperty ;
+	rdfs:label "All Years Membership" ;
+	dcterms:description "" ;
+	sempers:outputType "GRAPH" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-09-13T22:54:33.215-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-13T22:54:33.215-04:00"^^xsd:dateTime ;
+	dcterms:creator "Harold" ;
+	spin:body sempers:All_Years_Membership_query .
+
+sempers:All_Years_Membership_query sp:text """CONSTRUCT { ?CCode ?MemberIn ?year .}
+WHERE {
+  ?CCode semonto:MemberIn ?year .
+  ?year a semonto:year .
+  ?CCode ?MemberIn ?year .
+  ?MemberIn semonto:version ?version .
+  ?year rdfs:label ?year_label .
+}""" ;
+	a sp:Construct .
+
+sempers:CoW_Perspective_year_membership_in_1900 a spin:MagicProperty ;
+	rdfs:label "year membership in 1900" ;
+	dcterms:description "" ;
+	sempers:outputType "GRAPH" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-09-13T22:54:33.216-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-13T22:54:33.216-04:00"^^xsd:dateTime ;
+	dcterms:creator "Harold" ;
+	spin:body sempers:year_membership_in_1900_query .
+
+sempers:year_membership_in_1900_query sp:text """CONSTRUCT { ?CCode ?MemberIn ?year .}
+WHERE {
+  ?CCode semonto:MemberIn ?year .
+  ?year a semonto:year .
+  ?CCode ?MemberIn ?year .
+  ?MemberIn semonto:version ?version .
+  ?year rdfs:label ?year_label VALUES ?year_label { \"1900.0\" } .
+}""" ;
+	a sp:Construct .
+
+sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_1 .
+
+sempers:CoW_Perspective_slot_1 olo:index "1"^^xsd:int ;
+	olo:item sempers:CoW_Perspective_County_to_Year .
+
+sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_2 .
+
+sempers:CoW_Perspective_slot_2 olo:index "2"^^xsd:int ;
+	olo:item sempers:CoW_Perspective_All_Years_Membership .
+
+sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_3 .
+
+sempers:CoW_Perspective_slot_3 olo:index "3"^^xsd:int ;
+	olo:item sempers:CoW_Perspective_year_membership_in_1900 .
+
+sempers:CoW_Perspective olo:index "0"^^xsd:int .
