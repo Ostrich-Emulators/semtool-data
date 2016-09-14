@@ -38,12 +38,12 @@ sempers:Perspective a owl:Class ;
 	rdfs:label "Perspective" ;
 	rdfs:subClassOf olo:OrderedList , ui:Element .
 
-_:node1asjhf39rx1 a owl:Restriction ;
+_:node1asl2p1nkx1 a owl:Restriction ;
 	owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
 	owl:onClass sempers:InsightProperties ;
 	owl:onProperty olo:item .
 
-sempers:Perspective rdfs:subClassOf _:node1asjhf39rx1 .
+sempers:Perspective rdfs:subClassOf _:node1asl2p1nkx1 .
 
 sempers:insight a owl:ObjectProperty ;
 	rdfs:label "insight" ;
@@ -54,26 +54,27 @@ semonto:insights a semcore:InsightDataset .
 sempers:CoW_Perspective a sempers:Perspective ;
 	rdfs:label "CoW Perspective" ;
 	dcterms:description "CoW Perspective" ;
-	dcterms:created "2016-09-14T01:07:17.435-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T01:07:17.435-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-09-14T15:29:03.733-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T15:29:03.733-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" .
 
 sempers:CoW_Perspective_col_chart a spin:MagicProperty ;
-	rdfs:label "col chart" ;
-	dcterms:description "" ;
+	rdfs:label "Years membership in State System" ;
+	dcterms:description "The count of years each county has been a part of the international state system" ;
 	sempers:outputType "GRID" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T15:29:03.736-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
-	spin:body sempers:col_chart_query .
+	spin:body sempers:Years_membership_in_State_System_query .
 
-sempers:col_chart_query sp:text """SELECT DISTINCT ?CCode (xsd:double(COUNT(DISTINCT(?year))) AS ?YearCount)
+sempers:Years_membership_in_State_System_query sp:text """SELECT DISTINCT ?Name (xsd:double(COUNT(DISTINCT(?year))) AS ?YearCount)
 WHERE {
   ?year a semonto:year .
   ?CCode semonto:MemberIn ?year .
   ?CCode a semonto:CCode .
-} GROUP BY ?CCode""" ;
+  ?CCode semonto:StateAbb ?Name .
+} GROUP BY ?Name""" ;
 	a sp:Select .
 
 sempers:CoW_Perspective_County_to_Year a spin:MagicProperty ;
@@ -82,7 +83,7 @@ sempers:CoW_Perspective_County_to_Year a spin:MagicProperty ;
 	sempers:outputType "GRID" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T01:07:17.437-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T15:29:03.738-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:County_to_Year_query .
 
@@ -102,7 +103,7 @@ sempers:CoW_Perspective_All_Years_Membership a spin:MagicProperty ;
 	sempers:outputType "GRAPH" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.437-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T01:07:17.437-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T15:29:03.739-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:All_Years_Membership_query .
 
@@ -122,7 +123,7 @@ sempers:CoW_Perspective_year_membership_in_1900 a spin:MagicProperty ;
 	sempers:outputType "GRAPH" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.438-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T01:07:17.438-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-14T15:29:03.741-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:year_membership_in_1900_query .
 
