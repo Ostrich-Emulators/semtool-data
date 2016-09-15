@@ -38,12 +38,12 @@ sempers:Perspective a owl:Class ;
 	rdfs:label "Perspective" ;
 	rdfs:subClassOf olo:OrderedList , ui:Element .
 
-_:node1asl2p1nkx1 a owl:Restriction ;
+_:node1asm22o16x1 a owl:Restriction ;
 	owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
 	owl:onClass sempers:InsightProperties ;
 	owl:onProperty olo:item .
 
-sempers:Perspective rdfs:subClassOf _:node1asl2p1nkx1 .
+sempers:Perspective rdfs:subClassOf _:node1asm22o16x1 .
 
 sempers:insight a owl:ObjectProperty ;
 	rdfs:label "insight" ;
@@ -54,9 +54,55 @@ semonto:insights a semcore:InsightDataset .
 sempers:CoW_Perspective a sempers:Perspective ;
 	rdfs:label "CoW Perspective" ;
 	dcterms:description "CoW Perspective" ;
-	dcterms:created "2016-09-14T15:29:03.733-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T15:29:03.733-04:00"^^xsd:dateTime ;
+	dcterms:created "2016-09-15T00:36:07.334-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-15T00:36:07.334-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" .
+
+sempers:CoW_Perspective_National_Material_Capabilities_in_2007 a spin:MagicProperty ;
+	rdfs:label "National Material Capabilities in 2007" ;
+	dcterms:description "" ;
+	sempers:outputType "PARALLEL_COORDS" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-09-15T00:36:07.335-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-15T00:36:07.335-04:00"^^xsd:dateTime ;
+	dcterms:creator "Harold" ;
+	spin:body sempers:National_Material_Capabilities_in_2007_query .
+
+sempers:National_Material_Capabilities_in_2007_query sp:text """SELECT ?CCode ?milex ?cinc ?irst ?tpop ?upop ?milper ?pec
+WHERE {
+  ?CCode semonto:MemberIn ?year .
+  ?year a semonto:year .
+  ?CCode ?MemberIn ?year .
+  ?MemberIn semonto:milex ?milex .
+  ?MemberIn semonto:cinc ?cinc .
+  ?MemberIn semonto:irst ?irst .
+  ?MemberIn semonto:tpop ?tpop .
+  ?MemberIn semonto:upop ?upop .
+  ?MemberIn semonto:milper ?milper .
+  ?MemberIn semonto:pec ?pec .
+  ?year rdfs:label ?year_label VALUES ?year_label { \"2007.0\" } .
+}""" ;
+	a sp:Select .
+
+sempers:CoW_Perspective_Show_military_expenditures_over_time a spin:MagicProperty ;
+	rdfs:label "Show military expenditures over time" ;
+	dcterms:description "" ;
+	sempers:outputType "HEATMAP" ;
+	rdfs:subClassOf sempers:InsightProperties ;
+	dcterms:created "2016-09-15T00:36:07.336-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-15T00:36:07.336-04:00"^^xsd:dateTime ;
+	dcterms:creator "Harold" ;
+	spin:body sempers:Show_military_expenditures_over_time_query .
+
+sempers:Show_military_expenditures_over_time_query sp:text """SELECT ?CCode ?year ?milex
+WHERE {
+  ?CCode semonto:MemberIn ?year .
+  ?year a semonto:year .
+  ?CCode ?MemberIn ?year .
+  ?MemberIn semonto:milex ?milex .
+  ?year rdfs:label ?year_label .
+}""" ;
+	a sp:Select .
 
 sempers:CoW_Perspective_col_chart a spin:MagicProperty ;
 	rdfs:label "Years membership in State System" ;
@@ -64,7 +110,7 @@ sempers:CoW_Perspective_col_chart a spin:MagicProperty ;
 	sempers:outputType "GRID" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T15:29:03.736-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-15T00:36:07.337-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:Years_membership_in_State_System_query .
 
@@ -83,7 +129,7 @@ sempers:CoW_Perspective_County_to_Year a spin:MagicProperty ;
 	sempers:outputType "GRID" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.436-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T15:29:03.738-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-15T00:36:07.338-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:County_to_Year_query .
 
@@ -103,7 +149,7 @@ sempers:CoW_Perspective_All_Years_Membership a spin:MagicProperty ;
 	sempers:outputType "GRAPH" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.437-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T15:29:03.739-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-15T00:36:07.339-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:All_Years_Membership_query .
 
@@ -123,7 +169,7 @@ sempers:CoW_Perspective_year_membership_in_1900 a spin:MagicProperty ;
 	sempers:outputType "GRAPH" ;
 	rdfs:subClassOf sempers:InsightProperties ;
 	dcterms:created "2016-09-14T01:07:17.438-04:00"^^xsd:dateTime ;
-	dcterms:modified "2016-09-14T15:29:03.741-04:00"^^xsd:dateTime ;
+	dcterms:modified "2016-09-15T00:36:07.339-04:00"^^xsd:dateTime ;
 	dcterms:creator "Harold" ;
 	spin:body sempers:year_membership_in_1900_query .
 
@@ -140,21 +186,31 @@ WHERE {
 sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_1 .
 
 sempers:CoW_Perspective_slot_1 olo:index "1"^^xsd:int ;
-	olo:item sempers:CoW_Perspective_col_chart .
+	olo:item sempers:CoW_Perspective_National_Material_Capabilities_in_2007 .
 
 sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_2 .
 
 sempers:CoW_Perspective_slot_2 olo:index "2"^^xsd:int ;
-	olo:item sempers:CoW_Perspective_County_to_Year .
+	olo:item sempers:CoW_Perspective_Show_military_expenditures_over_time .
 
 sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_3 .
 
 sempers:CoW_Perspective_slot_3 olo:index "3"^^xsd:int ;
-	olo:item sempers:CoW_Perspective_All_Years_Membership .
+	olo:item sempers:CoW_Perspective_col_chart .
 
 sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_4 .
 
 sempers:CoW_Perspective_slot_4 olo:index "4"^^xsd:int ;
+	olo:item sempers:CoW_Perspective_County_to_Year .
+
+sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_5 .
+
+sempers:CoW_Perspective_slot_5 olo:index "5"^^xsd:int ;
+	olo:item sempers:CoW_Perspective_All_Years_Membership .
+
+sempers:CoW_Perspective olo:slot sempers:CoW_Perspective_slot_6 .
+
+sempers:CoW_Perspective_slot_6 olo:index "6"^^xsd:int ;
 	olo:item sempers:CoW_Perspective_year_membership_in_1900 .
 
 sempers:CoW_Perspective olo:index "0"^^xsd:int .
